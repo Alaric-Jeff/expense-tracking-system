@@ -8,7 +8,6 @@ dotenv.config();
 
 const DrizzlePlugin = async (fastify: FastifyInstance, opts: PoolConfig) => {
   try {
-    // Use the passed-in opts (or fallback to env connection string)
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
       ...opts,
