@@ -1,6 +1,7 @@
 import Fastify from 'fastify'
 import dotenv from 'dotenv'
 import DrizzlePlugin from './plugins/DrizzlePlugin.js';
+import { fastifyBcrypt } from 'fastify-bcrypt';
 
 dotenv.config();
 
@@ -9,6 +10,9 @@ const fastify = Fastify({
     http2: true
 });
 
+fastify.register(fastifyBcrypt, {
+    saltWorkFactor: 12
+});
 fastify.register(DrizzlePlugin, {
     max: 20,
     maxLifetimeSeconds: 10

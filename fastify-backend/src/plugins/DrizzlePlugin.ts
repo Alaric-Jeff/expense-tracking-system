@@ -18,7 +18,7 @@ const DrizzlePlugin = async (fastify: FastifyInstance, opts: PoolConfig) => {
     client.release();
 
     const db = drizzle(pool);
-    fastify.decorate('db', db);
+    fastify.decorate('db', drizzle(pool));
 
     fastify.addHook('onClose', async () => {
       await pool.end();
