@@ -11,7 +11,7 @@ async function AddUserService(fastify: FastifyInstance, user: UserInput) {
         password
     } = user;
 
-    const existing = await fastify.db.select().from(users_table).where(eq(users_table.email, email))
+    const existing = await fastify.db.select().from(users_table).where(eq(users_table.email, email));
 
     if(existing){
         fastify.log.debug(`user already exists`)
