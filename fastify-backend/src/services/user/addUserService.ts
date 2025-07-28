@@ -13,15 +13,15 @@ async function AddUserService(fastify: FastifyInstance, user: UserInput) {
 
     const existing = await fastify.db.select().from(users_table).where(eq(users_table.email, email));
 
-    if(existing){
+    if(existing.length > 0){
         fastify.log.debug(`user already exists`)
-        throw new Error(`User with email: "${email}" alreay exists`);
+        throw new Error(`User with email: "${existing}" alreay exists`);
     };
 
     try{
         const newPassword = await fastify.bcrypt.hash(password)
         await fastify.db.transaction(async (drizzle)=> {
-                drizzle.insert(users_table).values({
+               await drizzle.insert(users_table).values({
                 firstName, 
                 lastName,
                 email,
@@ -35,7 +35,7 @@ async function AddUserService(fastify: FastifyInstance, user: UserInput) {
         }else{
             fastify.log.info(`Unknown error occured, err: ${err}`)
         }
-        throw new Error(`AddUserService() failed`);
+        throw err;
     };
 };
 

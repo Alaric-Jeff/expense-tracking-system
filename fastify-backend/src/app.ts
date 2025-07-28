@@ -1,15 +1,16 @@
 import Fastify from 'fastify'
 import dotenv from 'dotenv'
 import DrizzlePlugin from './plugins/DrizzlePlugin.js';
+import RegisterRouters from './routers/index.js';
 import { fastifyBcrypt } from 'fastify-bcrypt';
 
 dotenv.config();
 
 const fastify = Fastify({
     logger: true,
-    http2: true
 });
 
+fastify.register(RegisterRouters);
 fastify.register(fastifyBcrypt, {
     saltWorkFactor: 12
 });
