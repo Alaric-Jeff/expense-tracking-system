@@ -15,6 +15,7 @@ const UpdateUserController = async ({body, server}: FastifyRequest<{Body: Update
             user_id,
             firstName,
             lastName,
+            password
         });
 
         return reply.code(200).send({
