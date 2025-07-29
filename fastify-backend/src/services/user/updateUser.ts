@@ -18,10 +18,16 @@ async function UpdateUserService(fastify: FastifyInstance, body: UpdateUserBodyT
       return;
     }
 
-    await fastify.db
+    const updatedUser = await fastify.db
       .update(users_table)
       .set(updates)
-      .where(eq(users_table.user_id, user_id));
+      .where(eq(users_table.user_id, user_id)).returning({
+        user_id: users_table.user_id,
+        firstName: users_table.firstName,
+        lastName: users_table.lastName,
+      })
+
+    return updatedUser;
 
   } catch (err: unknown) {
     if (err instanceof Error) {
