@@ -28,7 +28,7 @@ async function AddUserService(fastify: FastifyInstance, user: UserInput) {
                 password: newPassword
             })
         });
-
+        return;
     }catch(err: unknown){
         if(err instanceof Error){
             fastify.log.info(`Error occured in AddUserService(), reason: ${err.message}`)
