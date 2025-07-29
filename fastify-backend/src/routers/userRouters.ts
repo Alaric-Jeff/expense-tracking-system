@@ -29,5 +29,5 @@ export const UserRoutes = async (fastify: FastifyInstance) =>{
             }
         },
         handler: DeleteUserController
-    })
-}
+    });
+};
