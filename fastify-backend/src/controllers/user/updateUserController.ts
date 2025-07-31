@@ -22,7 +22,7 @@ const UpdateUserController = async ({body, server}: FastifyRequest<{Body: Update
             message: "Succesfully updated your account",
             success: true, 
             user: updatedUser
-        })
+        });
 
     }catch(err: unknown){
         return reply.code(500).send({
