@@ -9,10 +9,11 @@ export enum ExpenseCategory {
 }
 
 export const AddExpenseSchema = Type.Object({
-   user_id: Type.Integer(),
-   category: Type.Enum(ExpenseCategory),
-   expense: Type.Number(),
-   description: Type.String({maxLength: 255})
+  user_id: Type.Integer(),
+  category: Type.Enum(ExpenseCategory),
+  expense: Type.Number({ minimum: 0 }),
+  description: Type.Optional(Type.String({ maxLength: 255 }))
 });
+
 
 export type AddExpenseType = Static<typeof AddExpenseSchema>;

@@ -1,9 +1,9 @@
 import { pgTable, integer, varchar, timestamp, pgEnum, numeric, index } from "drizzle-orm/pg-core";
 import users_table from "./userModel.js";
 
-const expense_category = pgEnum('expense', ['food', 'transport', 'entertainment', 'bills', 'utilities'])
+export const expense_category = pgEnum('expense', ['food', 'transport', 'entertainment', 'bills', 'utilities'])
 
-const expenses = pgTable('expenses', {
+export const expenses = pgTable('expenses', {
     expense_id: integer().primaryKey().generatedAlwaysAsIdentity(),
     user_id: integer().references(() => users_table.user_id).notNull(),
     category: expense_category().notNull(),
@@ -19,4 +19,4 @@ const expenses = pgTable('expenses', {
     };
 });
 
-export default expenses;
+
