@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify"
 import AddExpenseController from "../controllers/expense/addExpense.js";
-import { AddExpenseSchema, AddExpenseType } from "../schemas/expense/AddSchema/AddSchema.js";
+import { AddExpenseSchema } from "../schemas/expense/AddSchema/AddSchema.js";
+import { AddSchemaResponse200 } from "../schemas/expense/AddSchema/AddSchemaResponse.js";
 export const expenseRouters = async (fastify: FastifyInstance)=>{
     fastify.route({
         url: '/add-expense',
@@ -8,9 +9,7 @@ export const expenseRouters = async (fastify: FastifyInstance)=>{
         schema: {
             body: AddExpenseSchema,
             response: {
-                200: {
-                    type: 'object'
-                }
+                200: AddSchemaResponse200
             }
         },
         handler: AddExpenseController

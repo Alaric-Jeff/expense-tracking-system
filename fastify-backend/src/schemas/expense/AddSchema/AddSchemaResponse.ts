@@ -1,6 +1,6 @@
 import {Type, Static} from '@sinclair/typebox'
 
-const AddSchemaResponse200 = Type.Object({
+export const AddSchemaResponse200 = Type.Object({
   message: Type.String(),
   success: Type.Boolean(),
   data: Type.Object({
