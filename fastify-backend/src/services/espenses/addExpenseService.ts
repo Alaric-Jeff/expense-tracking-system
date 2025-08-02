@@ -15,14 +15,15 @@ async function AddExpenseService(fastify: FastifyInstance, body: AddExpenseType)
 
         const newExpense: string = String(expense)
 
-        await fastify.db.transaction(async (drizzle)=> {
-            await drizzle.insert(expenses).values({
+        const result = await fastify.db.transaction(async (drizzle)=> {
+            return await drizzle.insert(expenses).values({
                 user_id,
                 category,
                 expense: newExpense,
                 description
             })
         });
+        return result.rows[0];
     }catch(err: unknown){
         throw new Error(`AddExpenseService() failed`)
     }
